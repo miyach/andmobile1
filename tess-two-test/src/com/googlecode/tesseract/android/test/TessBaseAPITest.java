@@ -22,19 +22,24 @@ import com.googlecode.tesseract.android.TessBaseAPI;
 import com.googlecode.tesseract.android.TessBaseAPI.PageIteratorLevel;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
+import android.os.Environment;
 import android.test.suitebuilder.annotation.SmallTest;
+import android.util.Log;
 
 import java.io.File;
 
 import junit.framework.TestCase;
 
 public class TessBaseAPITest extends TestCase {
-    private static final String TESSBASE_PATH = "/mnt/sdcard/tesseract/";
+	public static final String TESSBASE_PATH = Environment
+			.getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/";
+    //private static final String TESSBASE_PATH = "/mnt/sdcard/tesseract/";
     private static final String DEFAULT_LANGUAGE = "eng";
     private static final String EXPECTED_FILE = TESSBASE_PATH + "tessdata/" + DEFAULT_LANGUAGE
             + ".traineddata";
@@ -77,15 +82,21 @@ public class TessBaseAPITest extends TestCase {
         final Canvas canvas = new Canvas(bmp);
 
         canvas.drawColor(Color.WHITE);
-
         paint.setColor(Color.BLACK);
         paint.setStyle(Style.FILL);
         paint.setAntiAlias(true);
         paint.setTextAlign(Align.CENTER);
         paint.setTextSize(24.0f);
         canvas.drawText(text, width / 2, height / 2, paint);
-
+    	
         return bmp;
+    }
+    
+    private static Bitmap getImageFile(String imgfile) {
+		BitmapFactory.Options options = new BitmapFactory.Options();
+		options.inSampleSize = 4;
+		final Bitmap bmp = BitmapFactory.decodeFile(imgfile, options);  	
+       return bmp;
     }
 
     @SmallTest
@@ -94,9 +105,13 @@ public class TessBaseAPITest extends TestCase {
         assertTrue("Make sure that you've copied " + DEFAULT_LANGUAGE + ".traineddata to "
                 + EXPECTED_FILE, new File(EXPECTED_FILE).exists());
 
-        final String inputText = "hello";
-        final Bitmap bmp = getTextImage(inputText, 640, 480);
-
+        //final String inputText = "hello";
+        //final Bitmap bmp = getTextImage(inputText, 640, 480);
+        String DATA_PATH = Environment
+    			.getExternalStorageDirectory().toString() + "/SimpleAndroidOCR/";
+        String imgfile = DATA_PATH + "/ocr.jpg";
+        final Bitmap bmp = getImageFile(imgfile);
+        
         // Attempt to initialize the API.
         final TessBaseAPI baseApi = new TessBaseAPI();
         baseApi.init(TESSBASE_PATH, DEFAULT_LANGUAGE);
@@ -105,8 +120,9 @@ public class TessBaseAPITest extends TestCase {
 
         // Ensure that the result is correct.
         final String outputText = baseApi.getUTF8Text();
-        assertEquals("\"" + outputText + "\" != \"" + inputText + "\"", inputText, outputText);
-
+        //assertEquals("\"" + outputText + "\" != \"" + inputText + "\"", inputText, outputText);
+        Log.v("TessBaseAPI=OutputText>", outputText);
+        
         // Ensure getRegions() works.
         final Pixa regions = baseApi.getRegions();
         assertEquals("Found one region", regions.size(), 1);
