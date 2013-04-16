@@ -94,7 +94,7 @@ public class OCRHelper {
 		BitmapFactory.Options options = new BitmapFactory.Options();
 		//options.inSampleSize = 4;
 		options.inSampleSize = 1;
-		options.inPreferQualityOverSpeed = true;
+		//options.inPreferQualityOverSpeed = true;
 		//options.inPurgeable = true;
 
 		Bitmap bitmap = BitmapFactory.decodeFile(filepath, options);
