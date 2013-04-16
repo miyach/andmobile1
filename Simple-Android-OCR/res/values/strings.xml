@@ -6,4 +6,8 @@
     <string name="button_text">Take Photo</string>
     <string name="text_hint">OCRed Text will appear here.</string>
 
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_share">Share</string>
+    
 </resources>

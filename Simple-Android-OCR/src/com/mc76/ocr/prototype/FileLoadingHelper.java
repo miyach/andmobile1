@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.widget.EditText;
 
 public class FileLoadingHelper {
 	String TAG = "FileLoadingHelper.java";
@@ -20,12 +21,14 @@ public class FileLoadingHelper {
 	String TESS_DATA = "tessdata";
 	String TESS_ZIP_ENG = "eng.zip";
 	String lang = null;
+	EditText viewstatus = null;
 
 	public FileLoadingHelper(Activity anActivity, String datapath,
-			String language) {
+			String language, EditText status) {
 		activity = anActivity;
 		DATA_PATH = datapath;
 		lang = language;
+		viewstatus = status;
 	}
 
 	public boolean unzipTrainingFile() {
@@ -39,7 +42,8 @@ public class FileLoadingHelper {
 
 		@Override
 		public void run() {
-			sendMessage("-----------------------------------------------");
+			sendMessage("Unzipping OCR data, please wait...");
+			
 			String[] paths = new String[] { DATA_PATH, DATA_PATH + "tessdata/" };
 
 			try {
@@ -113,13 +117,16 @@ public class FileLoadingHelper {
 						inputStream.closeEntry();
 					}
 					inputStream.close();
-					sendMessage("-----------------------------------------------");
-					sendMessage("Unzipping complete");
-
+					//sendMessage("-----------------------------------------------");
+					sendMessage("Unzipping complete. OCR is ready!");
+					
 				} catch (IOException e) {
 					sendMessage("Exception occured: " + e.getMessage());
 					e.printStackTrace();
 				}
+			} else {
+				sendMessage("OCR ready!");
+
 			}
 		}
 	};
@@ -129,6 +136,7 @@ public class FileLoadingHelper {
 		@Override
 		public void handleMessage(Message msg) {
 			Log.v(TAG, "\n" + msg.getData().getString("data"));
+			viewstatus.setText(msg.getData().getString("data"));
 			super.handleMessage(msg);
 		}
 	};

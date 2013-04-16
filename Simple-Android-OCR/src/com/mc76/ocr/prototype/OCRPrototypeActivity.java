@@ -2,26 +2,27 @@ package com.mc76.ocr.prototype;
 
 import java.io.File;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class OCRPrototypeActivity extends Activity {
 	public static final String PACKAGE_NAME = "com.mc76.ocr.prototype";
 	public static final String DATA_PATH = Environment
-			.getExternalStorageDirectory().toString() + "/OCRPrototype1/";
+			.getExternalStorageDirectory().toString() + "/OCRPrototype/";
 
 	// You should have the trained data file in assets folder
 	// You can get them at:
@@ -38,25 +39,11 @@ public class OCRPrototypeActivity extends Activity {
 
 	protected static final String PHOTO_TAKEN = "photo_taken";
 
-	// processbar settings
-	static int progress;
-	ProgressBar progressBar;
-	int progressStatus = 0;
-	Handler handler = new Handler();
-
+	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
-//		OCRHelper.preLoadTrainingDictionary(getAssets(), getBaseContext(),
-//				DATA_PATH, lang, TAG);
-
-		FileLoadingHelper helper = new FileLoadingHelper(this,DATA_PATH,lang);
-		helper.unzipTrainingFile();
 		
 		super.onCreate(savedInstanceState);
-
-		//progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-		//progressBar.setVisibility(View.GONE);
 		
 		setContentView(R.layout.main);
 
@@ -64,8 +51,17 @@ public class OCRPrototypeActivity extends Activity {
 		_field = (EditText) findViewById(R.id.field);
 		_button = (Button) findViewById(R.id.button);
 		_button.setOnClickListener(new ButtonClickHandler());
-
 		_path = DATA_PATH + "/ocr.jpg";
+		
+	    /**
+	     * Enabling Action Bar navigation tabs
+	     */
+
+	    
+	    
+		//initilized OCR training data
+		FileLoadingHelper helper = new FileLoadingHelper(this,DATA_PATH,lang,_field);
+		helper.unzipTrainingFile();
 	}
 
 	public class ButtonClickHandler implements View.OnClickListener {
@@ -109,39 +105,10 @@ public class OCRPrototypeActivity extends Activity {
 			// Bundle extras = data.getExtras();
 			// Bitmap mImageBitmap = (Bitmap) extras.get("data");
 			// _image.setImageBitmap(mImageBitmap);
-			// process photo
 			Toast.makeText(getBaseContext(), "preview photo",
 					Toast.LENGTH_SHORT).show();
-
-			progress = 0;
-			progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-			//progressBar.setVisibility(View.VISIBLE);
-			new Thread(new Runnable() {
-				public void run() {
-					// ---do some work here---
-					while (progressStatus < 10) {
-						progressStatus = doSomeWork();
-					}
-					handler.post(new Runnable() {
-						public void run() {
-							// ---0 - VISIBLE; 4 - INVISIBLE; 8 - GONE---
-							progressBar.setVisibility(View.GONE);
-						}
-					});
-				}
-
-				private int doSomeWork() {
-					try {
-						// ---simulate doing some work---
-						// Thread.sleep(500);
-						onPhotoTaken();
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					return ++progress;
-				}
-			}).start();
-
+			//process captured photo			
+			onPhotoTaken();
 		} else {
 			Log.v(TAG, "User cancelled");
 			Toast.makeText(getBaseContext(), "User cancelled",
@@ -170,7 +137,7 @@ public class OCRPrototypeActivity extends Activity {
 		// show the image
 		_image.setImageBitmap(bitmap);
 
-		String recognizedText = OCRHelper.OCRFile(getBaseContext(), _path,
+		String recognizedText = OCRHelper.OCRFile(getBaseContext(), DATA_PATH,
 				lang, bitmap, TAG);
 		if (recognizedText.length() != 0) {
 			_field.setText(_field.getText().toString().length() == 0 ? recognizedText
@@ -182,4 +149,13 @@ public class OCRPrototypeActivity extends Activity {
 		// Cycle done.
 	}
 
+	 @Override
+	    public boolean onCreateOptionsMenu(Menu menu) {
+	        MenuInflater menuInflater = getMenuInflater();
+	        menuInflater.inflate(R.menu.main, menu);
+
+	        // Calling super after populating the menu is necessary here to ensure that the
+	        // action bar helpers have a chance to handle this event.
+	        return super.onCreateOptionsMenu(menu);
+	    }
 }
