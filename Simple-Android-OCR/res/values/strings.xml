@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">MC OCR Prototype Activity!</string>
-    <string name="app_name">OCR Prototype1</string>
-    <string name="button_text">Take Photo</string>
+    <string name="hello">MC-OCR Alpha1 Activity!</string>
+    <string name="app_name">MC-OCR Alpha1</string>
+    <string name="button_text">Scan Image</string>
     <string name="text_hint">OCRed Text will appear here.</string>
 
     <string name="menu_refresh">Refresh</string>
