@@ -15,7 +15,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/text_hint" />
-
+	
+	<ProgressBar
+     	android:id="@+id/progress_bar"
+     	android:layout_width="wrap_content"
+     	android:layout_height="wrap_content"
+     	android:maxWidth="30dip"
+     	android:minWidth="30dip"
+     	android:maxHeight="30dip"
+     	android:minHeight="30dip"
+     	android:layout_marginRight="6dip"
+     	android:indeterminate="true" />
+	
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"

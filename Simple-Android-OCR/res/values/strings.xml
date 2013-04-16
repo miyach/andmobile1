@@ -3,7 +3,7 @@
 
     <string name="hello">MC OCR Prototype Activity!</string>
     <string name="app_name">OCR Prototype1</string>
-    <string name="button_text">Try OCR!</string>
+    <string name="button_text">Take Photo</string>
     <string name="text_hint">OCRed Text will appear here.</string>
 
 </resources>
