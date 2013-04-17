@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="hello">MC-OCR Alpha1 Activity!</string>
-    <string name="app_name">MC-OCR Alpha1</string>
-    <string name="button_text">Scan Image</string>
-    <string name="text_hint">OCRed Text will appear here.</string>
+    <string name="hello">Lotto OCR Alpha3 Activity!</string>
+    <string name="app_name">Lotto OCR Alpha3</string>
+    <string name="button_text">Scan Ticket</string>
+    <string name="text_hint">OCRed ticket numbers will appear here.</string>
 
     <string name="menu_refresh">Refresh</string>
     <string name="menu_search">Search</string>
