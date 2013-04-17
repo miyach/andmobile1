@@ -19,7 +19,7 @@ public class FileLoadingHelper {
 	Activity activity = null;
 	String DATA_PATH = null;
 	String TESS_DATA = "tessdata";
-	String TESS_ZIP_ENG = "eng.zip";
+	String TESS_ZIP_ENG = "lot.zip";
 	String lang = null;
 	EditText viewstatus = null;
 
