@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Lotto Ticker OCR</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="intro">OCRed ticket numbers will appear here.</string>
+	<string name="picture">Picture</string>
+	<string name="capture">Launch Camera</string>
+    
+</resources>
