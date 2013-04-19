@@ -21,19 +21,17 @@
         android:text="Select from Gallery"
         android:typeface="sans" />
 
-        <TextView
-		android:layout_gravity="center"   
-        android:layout_width="fill_parent"
+    <EditText
+        android:id="@+id/field"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:text="@string/intro"
-        android:textStyle="bold" />
-    
+        android:hint="@string/intro" />
+
     <ImageView
         android:id="@+id/picture"
-		android:layout_gravity="center"        
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_margin="5dp"
         android:background="@drawable/pic_border"
         android:contentDescription="@string/picture" />
