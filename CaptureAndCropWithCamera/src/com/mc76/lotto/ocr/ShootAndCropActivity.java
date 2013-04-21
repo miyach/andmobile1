@@ -86,7 +86,20 @@ public class ShootAndCropActivity extends Activity {
 		captureBtn.setOnClickListener( new View.OnClickListener() {
 
 			 public void onClick(View v) {
-				if (!isIntentAvailable(getBaseContext(),
+
+				 //Check if device has Camera
+				Context context = getBaseContext();
+					PackageManager packageManager = context.getPackageManager();			 
+					// if device support camera?
+					if (packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA)) {
+						//yes
+						Log.i("camera", "This device has camera!");
+					}else{
+						//no
+						Log.i("camera", "This device has no camera!");
+					}
+				 
+				 if (!isIntentAvailable(getBaseContext(),
 							MediaStore.ACTION_IMAGE_CAPTURE)) {
 						String errorMessage = "Whoops - your device doesn't support capturing images!";
 						showMessage(errorMessage);
