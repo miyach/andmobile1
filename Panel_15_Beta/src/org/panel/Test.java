@@ -2,6 +2,8 @@ package org.panel;
 
 import org.panel.Panel.OnPanelListener;
 
+import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.LocalActivityManager;
 import android.content.ComponentName;
@@ -21,11 +23,15 @@ public class Test extends Activity implements OnPanelListener {
 	private Panel bottomPanel;
 	private Panel topPanel;
 	/** Called when the activity is first created. */
-    @Override
+    @SuppressLint("NewApi")
+	@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+	    ActionBar actionBar = getActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        
         Panel panel;
         
         topPanel = panel = (Panel) findViewById(R.id.topPanel);
@@ -40,9 +46,9 @@ public class Test extends Activity implements OnPanelListener {
         panel.setOnPanelListener(this);
         panel.setInterpolator(new BackInterpolator(Type.OUT, 2));
 
-        panel = (Panel) findViewById(R.id.rightPanel);
-        panel.setOnPanelListener(this);
-        panel.setInterpolator(new ExpoInterpolator(Type.OUT));
+//        panel = (Panel) findViewById(R.id.rightPanel);
+//        panel.setOnPanelListener(this);
+//        panel.setInterpolator(new ExpoInterpolator(Type.OUT));
 
         bottomPanel = panel = (Panel) findViewById(R.id.bottomPanel);
         panel.setOnPanelListener(this);

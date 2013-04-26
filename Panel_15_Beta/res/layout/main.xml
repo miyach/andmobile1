@@ -6,9 +6,6 @@
 	android:layout_height="fill_parent"
     android:background="@drawable/pencil1" 
 >
-	<!--  
-	android:background="#767c9b"
-	-->
 	<LinearLayout
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
@@ -39,13 +36,21 @@
 	    		android:layout_width="fill_parent"
 	    		android:layout_height="wrap_content"
 			>
-				<CheckBox
-				    android:layout_width="fill_parent" 
-				    android:layout_height="60dip" 
-				    android:gravity="center"
-				    android:text="top check box"
-				    android:background="#688"
-				/>
+            <Button	
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Enter Numbers"
+			android:onClick="onClickCaptureNumberByEnter"/>
+             
+            <Button	
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Update tickets"/>   
+             <Button	
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="Update tickets"/>   
+            							
 				<TextView
 				    android:layout_width="fill_parent" 
 				    android:layout_height="wrap_content" 
@@ -81,7 +86,16 @@
 		    android:textSize="14dip"
 		    android:padding="4dip"
 		    android:textColor="#ddd"
-		    android:text="\nTry to use panels on each side of me\n\nEvery panel has its own interpolator\n\nLeft/Right panels are overlayed"
+		    android:text="\nSocial Pulse\n\n"
+		/>
+		<TextView
+		    android:layout_width="fill_parent" 
+		    android:layout_height="wrap_content" 
+		    android:layout_weight="1"
+		    android:textSize="14dip"
+		    android:padding="4dip"
+		    android:textColor="#ddd"
+		    android:text="\nNews Feed"
 		/>
 		<!--  
 		<org.panel.SmoothButton
@@ -133,18 +147,27 @@
             <Button	
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="Enter Numbers"
-			android:onClick="onClickCaptureNumberByEnter"/>
+			android:text="Today's lucky numbers"/>
             
             <Button	
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="OCR Ticket"/>   
+			android:text="Location Based"/>   
+		
+             <Button	
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Hot and Cold"/>
+                         	
+             <Button	
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Quick pick"/>   
+            
 			</LinearLayout>
 		</org.panel.Panel>
-		
-		
 	</LinearLayout>
+	
 	<LinearLayout
 	    android:orientation="vertical"
 	    android:layout_width="fill_parent"
@@ -165,19 +188,41 @@
 			    android:layout_width="33dip" 
 			    android:layout_height="fill_parent" 
 			/>
+	 			  			
+		 <LinearLayout
+				android:id="@id/panelContent" 
+			    android:orientation="vertical"
+	    		android:layout_width="fill_parent"
+	    		android:layout_height="wrap_content"
+			>
 			<TextView
 				android:id="@id/panelContent" 
 			    android:layout_width="wrap_content" 
 			    android:layout_height="fill_parent" 
 			    android:gravity="center"
 			    android:padding="4dip"
-			    android:text="Activities"
+			    android:text="Check Tickets"
 			    android:textSize="16dip"
 			    android:textColor="#eee"
 			    android:textStyle="bold"
 			    android:background="#999932"
 			/>
+			
+						
+			<Button	
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Enter numbers"/>  
+
+			<Button	
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="OCR Tickets"/>  
+		</LinearLayout>
+					
 		</org.panel.Panel>
+		
+		
 		
 		<org.panel.Panel
 		    android:layout_width="wrap_content" 
@@ -200,107 +245,48 @@
 			    android:layout_height="fill_parent" 
 			    android:gravity="center"
 			    android:padding="4dip"
-			    android:text="Winners"
+			    android:text="Social Pulse"
 			    android:textSize="16dip"
 			    android:textColor="#eee"
 			    android:textStyle="bold"
 			    android:background="#115544"
 			/>
 		</org.panel.Panel>
-				
+
+		
+		<org.panel.Panel
+		    android:layout_width="wrap_content" 
+		    android:layout_height="fill_parent" 
+		    android:id="@+id/leftPanel3" 
+		    android:layout_weight="1" 
+		    android:layout_gravity="left"
+		    panel:position="left"
+		    panel:openedHandle="@drawable/left_switcher_expanded_background"
+		    panel:closedHandle="@drawable/left_switcher_collapsed_background"
+		>
+			<Button
+				android:id="@id/panelHandle" 
+			    android:layout_width="33dip" 
+			    android:layout_height="fill_parent"
+			/>
+			<TextView
+				android:id="@id/panelContent" 
+			    android:layout_width="wrap_content" 
+			    android:layout_height="fill_parent" 
+			    android:gravity="center"
+			    android:padding="4dip"
+			    android:text="Tips"
+			    android:textSize="16dip"
+			    android:textColor="#eee"
+			    android:textStyle="bold"
+			    android:background="#115544"
+			/>
+		</org.panel.Panel>
+		
+						
 	</LinearLayout>
-	<org.panel.Panel
-	    android:layout_width="wrap_content" 
-	    android:layout_height="fill_parent" 
-	    android:id="@+id/rightPanel"
-	    android:layout_gravity="right"
-	    panel:position="right"
-	    panel:animationDuration="1000"
-	    panel:openedHandle="@drawable/right_switcher_expanded_background"
-	    panel:closedHandle="@drawable/right_switcher_collapsed_background"
-	    panel:weight="75%p"
-	>
-		<Button
-			android:id="@id/panelHandle" 
-		    android:layout_width="33dip" 
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="-110dip"
-		    android:layout_gravity="center"
-		/>
-		<TextView
-			android:id="@id/panelContent" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="fill_parent" 
-		    android:gravity="center"
-		    android:padding="4dip"
-		    android:text="Expo Interpolator\n\nRight content #1"
-		    android:textSize="16dip"
-		    android:textColor="#eee"
-		    android:textStyle="bold"
-		    android:background="#329999"
-		/>
-	</org.panel.Panel>
-	<org.panel.Panel
-	    android:layout_width="wrap_content" 
-	    android:layout_height="fill_parent"
-	    android:id="@+id/rightPanel2"
-	    android:layout_gravity="right"
-	    panel:position="right"
-	    panel:animationDuration="666"
-	    panel:openedHandle="@drawable/right_switcher_expanded_background"
-	    panel:closedHandle="@drawable/right_switcher_collapsed_background"
-	    panel:weight="100%p"
-	    panel:linearFlying="true"
-	>
-		<Button
-			android:id="@id/panelHandle" 
-		    android:layout_width="33dip" 
-		    android:layout_height="wrap_content"
-		    android:layout_gravity="center"
-		/>
-		<TextView
-			android:id="@id/panelContent" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="fill_parent"
-		    android:gravity="center"
-		    android:padding="4dip"
-		    android:text="Default Interpolator\n\nRight content #2\n\nweight == 100%p so it expands to full width"
-		    android:textSize="16dip"
-		    android:textColor="#eee"
-		    android:textStyle="bold"
-		    android:background="#329999"
-		/>
-	</org.panel.Panel>
-	<org.panel.Panel
-	    android:layout_width="wrap_content" 
-	    android:layout_height="fill_parent" 
-	    android:id="@+id/rightPanel3"
-	    android:layout_gravity="right"
-	    panel:position="right"
-	    panel:animationDuration="333"
-	    panel:openedHandle="@drawable/right_switcher_expanded_background"
-	    panel:closedHandle="@drawable/right_switcher_collapsed_background"
-	    panel:weight="75%p"
-	    panel:linearFlying="true"
-	>
-		<Button
-			android:id="@id/panelHandle" 
-		    android:layout_width="33dip" 
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="110dip"
-		    android:layout_gravity="center"
-		/>
-		<TextView
-			android:id="@id/panelContent" 
-		    android:layout_width="wrap_content" 
-		    android:layout_height="fill_parent" 
-		    android:gravity="center"
-		    android:padding="4dip"
-		    android:text="Default Interpolator\n\nRight content #3\n\nweight == 75%p so it expands to 3/4 width"
-		    android:textSize="16dip"
-		    android:textColor="#eee"
-		    android:textStyle="bold"
-		    android:background="#329999"
-		/>
-	</org.panel.Panel>
+	
+	
+	
+	
 </FrameLayout>
