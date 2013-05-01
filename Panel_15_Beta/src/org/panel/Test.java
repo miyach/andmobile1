@@ -2,6 +2,8 @@ package org.panel;
 
 import org.panel.Panel.OnPanelListener;
 
+import com.mc76.lotto649.slidedrawer.CaptureEnterNumberActivity;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -77,8 +79,7 @@ public class Test extends Activity implements OnPanelListener {
 	
 	public void onClickCaptureNumberByEnter(View e){
 		//start another itente
-		Intent i = new 
-    			Intent("com.mc76.slidedrawer.CaptureEnterNumberActivity");
+		Intent i = new Intent(this.getBaseContext(),CaptureEnterNumberActivity.class);
 		
     	//---use putExtra() to add new key/value pairs---            
     	i.putExtra("str1", "This is a string");
