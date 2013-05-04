@@ -3,10 +3,13 @@ package com.mc76.lotto649.slidedrawer;
 import java.util.ArrayList;
 
 import org.panel.R;
+import org.panel.Test;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -19,8 +22,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CaptureEnterNumberActivity extends Activity {
+	Context ctx = null;
 	AlertDialog.Builder builder = null;
-
 	public GridView gridView;
 	public ArrayList<String> selectedNumbers = new ArrayList();
 
@@ -36,8 +39,9 @@ public class CaptureEnterNumberActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lotto649_capture_number);
 
+		ctx =  this.getBaseContext();
+		
 		builder = new AlertDialog.Builder(this);
-
 		gridView = (GridView) findViewById(R.id.gridView1);
 
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -57,24 +61,28 @@ public class CaptureEnterNumberActivity extends Activity {
 					// change background color back to default color
 					tv.setBackgroundColor(Color.TRANSPARENT);
 					selectedNumbers.remove(selectedvalue);
-				}
+				} else {
 
 				if (selectedNumbers != null && selectedNumbers.size() == 5) {
-					Toast.makeText(getApplicationContext(),
-							"You have reached maximum of 6 numbers!",
-							Toast.LENGTH_LONG).show();
+					//save last selected numbers
+					selectedNumbers.add(selectedvalue);
+					tv.setBackgroundColor(Color.YELLOW);
+					
 					// 1. Instantiate an AlertDialog.Builder with its
 					// constructor
-
 					DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							switch (which) {
 							case DialogInterface.BUTTON_POSITIVE:
-								// Yes button clicked
+								// Yes button clicked								
 								dialog.dismiss();
+								Intent i = new Intent(ctx,Test.class);								
+						    	//---use putExtra() to add new key/value pairs---            
+						    	i.putExtra("lotto", "649");
+								i.putExtra("selectedNumbers", selectedNumbers.toString());
+								startActivity(i);
 								break;
-
 							case DialogInterface.BUTTON_NEGATIVE:
 								// No button clicked
 								dialog.dismiss();
@@ -87,7 +95,7 @@ public class CaptureEnterNumberActivity extends Activity {
 					// AlertDialog.Builder(this);
 					String title = "";
 					for (int i = 0; i < selectedNumbers.size(); i++) {
-						if (i == selectedNumbers.size()) {
+						if (i == 5) {
 							title = title + (String) selectedNumbers.get(i);
 						} else {
 							title = title + (String) selectedNumbers.get(i)
@@ -100,9 +108,14 @@ public class CaptureEnterNumberActivity extends Activity {
 							.setNegativeButton("No", dialogClickListener)
 							.show();
 
-				} else {
+				} else if (selectedNumbers != null && selectedNumbers.size() < 5) {	
 					selectedNumbers.add(selectedvalue);
 					tv.setBackgroundColor(Color.YELLOW);
+				} else if (selectedNumbers != null && selectedNumbers.size() > 5) {	
+					tv.setBackgroundColor(Color.TRANSPARENT);					
+					Toast.makeText(getApplicationContext(), "You have selected maximum of 6 numbers!", Toast.LENGTH_LONG).show();
+				}
+				
 				}
 			}
 		});
@@ -126,70 +139,4 @@ public class CaptureEnterNumberActivity extends Activity {
 		});
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getMenuInflater().inflate(R.menu.main, menu);
-	// CreateMenu(menu);
-	// return true;
-	// }
-	//
-	// private void CreateMenu(Menu menu) {
-	// MenuItem mnu1 = menu.add(0, 0, 0, "Item 1");
-	// {
-	// mnu1.setAlphabeticShortcut('a');
-	// mnu1.setIcon(R.drawable.ic_launcher);
-	// }
-	// MenuItem mnu2 = menu.add(0, 1, 1, "Item 2");
-	// {
-	// mnu2.setAlphabeticShortcut('b');
-	// mnu2.setIcon(R.drawable.ic_launcher);
-	// }
-	// MenuItem mnu3 = menu.add(0, 2, 2, "Item 3");
-	// {
-	// mnu3.setAlphabeticShortcut('c');
-	// mnu3.setIcon(R.drawable.ic_launcher);
-	// }
-	// MenuItem mnu4 = menu.add(0, 3, 3, "Item 4");
-	// {
-	// mnu4.setAlphabeticShortcut('d');
-	// }
-	// menu.add(0, 4, 4, "Item 5");
-	// menu.add(0, 5, 5, "Item 6");
-	// menu.add(0, 6, 6, "Item 7");
-	// }
-	//
-	// private boolean MenuChoice(MenuItem item) {
-	// switch (item.getItemId()) {
-	// case 0:
-	// Toast.makeText(this, "You clicked on Item 1", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 1:
-	// Toast.makeText(this, "You clicked on Item 2", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 2:
-	// Toast.makeText(this, "You clicked on Item 3", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 3:
-	// Toast.makeText(this, "You clicked on Item 4", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 4:
-	// Toast.makeText(this, "You clicked on Item 5", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 5:
-	// Toast.makeText(this, "You clicked on Item 6", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// case 6:
-	// Toast.makeText(this, "You clicked on Item 7", Toast.LENGTH_LONG)
-	// .show();
-	// return true;
-	// }
-	// return false;
-	// }
 }
