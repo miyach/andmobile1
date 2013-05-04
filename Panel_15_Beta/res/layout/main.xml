@@ -254,7 +254,7 @@
 			/>
 		</org.panel.Panel>
 
-		
+<!--  		
 		<org.panel.Panel
 		    android:layout_width="wrap_content" 
 		    android:layout_height="fill_parent" 
@@ -284,6 +284,7 @@
 			/>
 		</org.panel.Panel>
 		
+-->
 						
 	</LinearLayout>
 	
