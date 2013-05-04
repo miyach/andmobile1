@@ -3,7 +3,7 @@
     xmlns:panel="http://schemas.android.com/apk/res/org.panel"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/lotto_generator" >
+    android:background="@drawable/pencil1" >
 
 	<LinearLayout
 	    android:orientation="vertical"

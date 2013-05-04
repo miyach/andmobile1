@@ -54,8 +54,8 @@ public class CaptureEnterNumberActivity extends Activity {
 					int position, long id) {
 				TextView tv = ((TextView) v);
 				String selectedvalue = (String) tv.getText();
-				Toast.makeText(getApplicationContext(), selectedvalue,
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getApplicationContext(), selectedvalue,
+//						Toast.LENGTH_SHORT).show();
 				if (selectedvalue != null
 						&& selectedNumbers.contains(selectedvalue)) {
 					// change background color back to default color
@@ -77,7 +77,7 @@ public class CaptureEnterNumberActivity extends Activity {
 							case DialogInterface.BUTTON_POSITIVE:
 								// Yes button clicked								
 								dialog.dismiss();
-								Intent i = new Intent(ctx,Test.class);								
+								Intent i = new Intent(ctx,DatastoreActivity.class);								
 						    	//---use putExtra() to add new key/value pairs---            
 						    	i.putExtra("lotto", "649");
 								i.putExtra("selectedNumbers", selectedNumbers.toString());
@@ -127,8 +127,8 @@ public class CaptureEnterNumberActivity extends Activity {
 				TextView tv = ((TextView) v);
 				String selectedvalue = (String) tv.getText();
 
-				Toast.makeText(getApplicationContext(),
-						"Selected:" + selectedvalue, Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getApplicationContext(),
+//						"Selected:" + selectedvalue, Toast.LENGTH_SHORT).show();
 			}
 
 			@Override

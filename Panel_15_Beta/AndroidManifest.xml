@@ -12,7 +12,7 @@
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
         <activity
-            android:name=".Test"
+            android:name="org.panel.Test"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="org.panel.Test" />
@@ -37,6 +37,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.mc76.lotto649.slidedrawer.DatastoreActivity"
+            android:label="@string/title_activity_datastore" >
+            
+           <intent-filter>
+                <action android:name="com.mc76.lotto649.slidedrawer.DatastoreActivity" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            
         </activity>
     </application>
 
